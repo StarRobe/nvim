@@ -1,4 +1,7 @@
-local cmp = require'cmp'
+local cmp_status_ok, cmp = pcall(require, "cmp")
+if not cmp_status_ok then
+  return
+end
 
 local kind_icons = {
   Text = "",
@@ -94,7 +97,9 @@ cmp.setup {
     end,
   },
 
-
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  },
   -- 来源
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },

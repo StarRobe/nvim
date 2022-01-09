@@ -26,4 +26,12 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-vsnip'    -- { name = 'vsnip' }
   use 'hrsh7th/vim-vsnip'
   use 'rafamadriz/friendly-snippets'
+  -- terminal
+  use 'akinsho/toggleterm.nvim'
+  -- indent line
+  use 'lukas-reineke/indent-blankline.nvim'
+  -- autopairs
+  use 'windwp/nvim-autopairs'
+  -- mutiple cursors
+  use {'mg979/vim-visual-multi',branch = 'master'}
 end)

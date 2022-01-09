@@ -1,3 +1,6 @@
 require('plugin.nvim-tree')
 require('plugin.treesitter')
 require('plugin.nvim-cmp')
+require('plugin.toggleterm')
+require('plugin.autopairs')
+require("plugin.indentline")
