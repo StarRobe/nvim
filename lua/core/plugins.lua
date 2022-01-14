@@ -29,9 +29,11 @@ return require('packer').startup(function()
   -- terminal
   use 'akinsho/toggleterm.nvim'
   -- indent line
-  use 'lukas-reineke/indent-blankline.nvim'
+  --use 'lukas-reineke/indent-blankline.nvim'
   -- autopairs
   use 'windwp/nvim-autopairs'
   -- mutiple cursors
   use {'mg979/vim-visual-multi',branch = 'master'}
+  --comment
+  use {'numToStr/Comment.nvim'}
 end)

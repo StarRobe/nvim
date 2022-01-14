@@ -24,4 +24,10 @@ map("n", "<A-l>", "<C-w>l", opt)
 map('v', '<', '<gv', opt)
 map('v', '>', '>gv', opt)
 
+--buffer
+map("n","<Tab>",":bn<CR>",opt)
+map("n","<S-Tab>",":bp<CR>",opt)
+map("n","<C-x>",":bd<CR>",opt)
+
 require('plugin.mappings')
+
