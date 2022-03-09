@@ -5,6 +5,11 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   --colorscheme
   use 'RRethy/nvim-base16'
+  -- gruvbox theme
+  use {
+      "ellisonleao/gruvbox.nvim",
+      requires = {"rktjmp/lush.nvim"}
+  }
   --tree
   use 'kyazdani42/nvim-tree.lua'
   use 'kyazdani42/nvim-web-devicons'
@@ -18,7 +23,7 @@ return require('packer').startup(function()
   use 'williamboman/nvim-lsp-installer'
   -- nvim-cmp
   use 'hrsh7th/cmp-nvim-lsp' -- { name = nvim_lsp }
-  use 'hrsh7th/cmp-buffer'   -- { name = 'buffer' },
+  use 'hrsh7th/cmp-buffer'   -- { name = 'buffer' }
   use 'hrsh7th/cmp-path'     -- { name = 'path' }
   use 'hrsh7th/cmp-cmdline'  -- { name = 'cmdline' }
   use 'hrsh7th/nvim-cmp'

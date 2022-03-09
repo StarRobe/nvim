@@ -1,4 +1,10 @@
-require'nvim-treesitter.configs'.setup {
+local status_ok, configs = pcall(require, "nvim-treesitter.configs")
+if not status_ok then
+  return
+end
+
+
+configs.setup {
   -- 安装 language parser
   -- :TSInstallInfo 命令查看支持的语言
   ensure_installed = {"html", "css", "vim", "lua", "javascript", "typescript", "tsx","c","cpp","python"},

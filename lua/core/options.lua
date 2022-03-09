@@ -3,7 +3,8 @@ local config = home .. '/.config/nvim'
 
 vim.cmd('filetype indent plugin on')
 vim.cmd('syntax on')
-vim.cmd('colorscheme base16-schemer-dark')
+--vim.cmd('colorscheme gruvbox')
+vim.cmd('colorscheme base16-onedark')
 
 vim.opt.autoindent     = true                              -- maintain indent of current line
 vim.opt.backspace      = 'indent,start,eol'                -- allow unrestricted backspacing in insert mode
@@ -51,7 +52,7 @@ vim.opt.undodir        = vim.opt.undodir + '.'             -- fallback
 vim.opt.undofile       = true                              -- actually use undo files
 vim.opt.virtualedit    = 'block'                           -- allow cursor to move where there is no text in visual block mode
 vim.opt.visualbell     = true                              -- stop annoying beeping for non-error errors
-vim.opt.whichwrap      = 'b,h,l,s,<,>,[,],~'               -- allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
+-- vim.opt.whichwrap      = 'b,h,l,s,<,>,[,],~'               -- allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
 vim.opt.wildmenu       = true                              -- show options as list when switching buffers etc
 vim.opt.wrap           = false                             -- don't change the line
 vim.opt.writebackup    = false                             -- don't keep backups after writing
