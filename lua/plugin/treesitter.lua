@@ -3,7 +3,6 @@ if not status_ok then
   return
 end
 
-
 configs.setup {
   -- 安装 language parser
   -- :TSInstallInfo 命令查看支持的语言
@@ -12,6 +11,9 @@ configs.setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false
+  },
+  autopairs = {
+    enable = true,
   },
   -- 启用增量选择
   incremental_selection = {
