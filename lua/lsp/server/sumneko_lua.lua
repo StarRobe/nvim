@@ -1,7 +1,8 @@
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-return {
+
+require'lspconfig'.sumneko_lua.setup {
   settings = {
     Lua = {
       runtime = {
@@ -12,7 +13,7 @@ return {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = {'vim','use'},
       },
       workspace = {
         -- Make the server aware of Neovim runtime files

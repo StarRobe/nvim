@@ -3,22 +3,22 @@ require('lsp')
 
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  --colorscheme
+  -- colorscheme
   use 'RRethy/nvim-base16'
-  -- gruvbox theme
+  use "projekt0n/github-nvim-theme"
   use {
       "ellisonleao/gruvbox.nvim",
       requires = {"rktjmp/lush.nvim"}
   }
-  --tree
+  -- tree
   use 'kyazdani42/nvim-tree.lua'
   use 'kyazdani42/nvim-web-devicons'
-  --treesitter
+  -- treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  --telescope
+  -- telescope
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-lua/plenary.nvim'
-  --lsp
+  -- lsp
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
   -- nvim-cmp
@@ -32,13 +32,20 @@ return require('packer').startup(function()
   use 'hrsh7th/vim-vsnip'
   use 'rafamadriz/friendly-snippets'
   -- terminal
-  use 'akinsho/toggleterm.nvim'
-  -- indent line
-  --use 'lukas-reineke/indent-blankline.nvim'
+  use {'akinsho/toggleterm.nvim', tag = 'v1.*'}
   -- autopairs
   use 'windwp/nvim-autopairs'
   -- mutiple cursors
   use {'mg979/vim-visual-multi',branch = 'master'}
   --comment
-  use {'numToStr/Comment.nvim'}
+  use 'numToStr/Comment.nvim'
+  -- surround
+  use 'tpope/vim-surround'
+  -- notify
+  use 'rcarriga/nvim-notify'
+  -- lua line
+  use 'nvim-lualine/lualine.nvim'
+
+  -- indent line
+  --use 'lukas-reineke/indent-blankline.nvim'
 end)
