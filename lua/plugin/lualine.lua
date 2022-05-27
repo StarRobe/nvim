@@ -3,44 +3,90 @@ if not status_ok then
   return
 end
 
-local diagnostics = {
-  'diagnostics',
+local gutterpadding = function()
+  local signcolumn = 0
+  local option = vim.wo.signcolumn
+  if option == 'yes' then
+    signcolumn = 2
+  elseif option == 'auto' then
+    local signs = vim.fn.sign_getplaced('')
+    if #signs[1].signs > 0 then
+      signcolumn = 2
+    end
+  end
 
-  -- Table of diagnostic sources, available sources are:
-  --   'nvim_lsp', 'nvim_diagnostic', 'coc', 'ale', 'vim_lsp'.
-  -- or a function that returns a table as such:
-  --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
-  sources = { 'nvim_diagnostic'},
+  local minwidth = 2
+  local numberwidth = vim.wo.numberwidth
+  local row = vim.api.nvim_buf_line_count(0)
+  local gutterwidth = math.max(
+    (#tostring(row) + 1),
+    minwidth,
+    numberwidth
+  ) + signcolumn
+  local padding = (' '):rep(gutterwidth - 1)
+  return padding
+end
 
-  -- Displays diagnostics for the defined severity types
-  sections = { 'error', 'warn', 'info', 'hint' },
-
-  diagnostics_color = {
-    -- Same values as the general color option can be used here.
-    error = 'DiagnosticError', -- Changes diagnostics' error color.
-    warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
-    info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
-    hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
-  },
-  symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
-  colored = true,           -- Displays diagnostics status in color if set to true.
-  update_in_insert = false, -- Update diagnostics in insert mode.
-  always_visible = false,   -- Show diagnostics even if there are none.
+local mode = {
+  "mode",
+  fmt = function()
+    local padding = gutterpadding()
+    if vim.bo.modified then
+      return padding .. '✘ '
+    else
+      return padding .. ' '
+    end
+  end,
 }
 
-local filename ={
-  'filename',
-  file_status = true,      -- Displays file status (readonly status, modified status)
-  path = 0,                -- 0: Just the filename
-  -- 1: Relative path
-  -- 2: Absolute path
+local location = function ()
+  local rhs = ' '
 
-  shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
-  -- for other components. (terrible name, any suggestions?)
+  if vim.fn.winwidth(0) > 80 then
+    local column = vim.fn.virtcol('.')
+    local width = vim.fn.virtcol('$')
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+    local height = vim.api.nvim_buf_line_count(0)
+
+    -- Add padding to stop RHS from changing too much as we move the cursor.
+    local padding = #tostring(height) - #tostring(line)
+    if padding > 0 then
+      rhs = rhs .. (' '):rep(padding)
+    end
+
+    rhs = rhs .. 'ℓ '
+    rhs = rhs .. line
+    rhs = rhs .. '/'
+    rhs = rhs .. height
+    rhs = rhs .. '  '
+    rhs = rhs .. column
+    rhs = rhs .. '/'
+    rhs = rhs .. width
+    rhs = rhs .. ' '
+    -- Add padding to stop rhs from changing too much as we move the cursor.
+    if #tostring(column) < 2 then
+      rhs = rhs .. ' '
+    end
+    if #tostring(width) < 2 then
+      rhs = rhs .. ' '
+    end
+  end
+  return rhs
+end
+
+-- Returns the 'fileencoding', if it's not UTF-8.
+local fileencoding = function()
+  local fileencoding = vim.bo.fileencoding
+  if #fileencoding > 0 and fileencoding ~= 'utf-8' then
+    return fileencoding
+  else
+    return ''
+  end
+end
+local filename = {
+  'filename',
   symbols = {
-    modified = '[+]',      -- Text to show when the file is modified.
-    readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-    unnamed = '[No Name]', -- Text to show for unnamed buffers.
+    modified = '',
   }
 }
 
@@ -48,27 +94,27 @@ lualine.setup({
   options = {
     icons_enabled = true,
     theme = "auto",
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = true,
     globalstatus = false,
   },
   sections = {
-    lualine_a = { "mode" },
-    lualine_b = { "branch", diagnostics },
-    lualine_c = { filename },
-    lualine_x = { "encoding" },
-    lualine_y = { "progress" },
-    lualine_z = { "location" },
+    lualine_a = { mode },
+    lualine_b = {},
+    lualine_c = { filename, fileencoding },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = { location },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { "filename" },
-    lualine_x = { "location" },
+    lualine_c = { filename },
+    lualine_x = {},
     lualine_y = {},
-    lualine_z = {},
+    lualine_z = {location},
   },
   tabline = {},
   extensions = {},

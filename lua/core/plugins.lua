@@ -5,7 +5,6 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   -- colorscheme
   use 'RRethy/nvim-base16'
-  use "projekt0n/github-nvim-theme"
   use {
       "ellisonleao/gruvbox.nvim",
       requires = {"rktjmp/lush.nvim"}
@@ -31,6 +30,9 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-vsnip'    -- { name = 'vsnip' }
   use 'hrsh7th/vim-vsnip'
   use 'rafamadriz/friendly-snippets'
+  -- lspkind
+  use 'onsails/lspkind-nvim'
+
   -- terminal
   use {'akinsho/toggleterm.nvim', tag = 'v1.*'}
   -- autopairs
@@ -47,5 +49,5 @@ return require('packer').startup(function()
   use 'nvim-lualine/lualine.nvim'
 
   -- indent line
-  --use 'lukas-reineke/indent-blankline.nvim'
+  use 'lukas-reineke/indent-blankline.nvim'
 end)

@@ -3,7 +3,6 @@ if not status_ok then
   return
 end
 lsp_installer.setup({
-  ensure_installed = { "pyright", "sumneko_lua", "clangd"}, -- ensure these servers are always installed
   automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
   ui = {
     icons = {
@@ -11,5 +10,5 @@ lsp_installer.setup({
       server_pending = "➜",
       server_uninstalled = "✗"
     }
-  }
+  },
 })

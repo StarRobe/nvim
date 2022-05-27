@@ -1,10 +1,9 @@
 local home = vim.env.HOME
 local config = home .. '/.config/nvim'
-
 vim.cmd('filetype indent plugin on')
 vim.cmd('syntax on')
 vim.cmd('colorscheme gruvbox')
---vim.cmd('colorscheme base16-bright')
+-- vim.cmd('colorscheme base16-bright')
 
 vim.notify             = require("notify")                 -- set notify by plugin nvim-notify
 
@@ -21,8 +20,7 @@ vim.opt.encoding       = "UTF-8"                           -- utf-8
 vim.opt.expandtab      = true                              -- always use spaces instead of tabs
 vim.opt.fileencoding   = "UTF-8"                           -- utf-8
 vim.opt.foldlevelstart = 99                                -- start unfolded
-vim.opt.foldmethod     = 'expr'                            -- set foldmethod by treesitter
-vim.opt.foldexpr      = 'nvim_treesitter#foldexptr()'
+vim.opt.foldmethod     = 'indent'                          -- set foldmethod by indent
 vim.opt.hidden         = true                              -- allows you to hide buffers with unsaved changes without being prompted
 vim.opt.hlsearch       = false                             -- cancel the highlighting of search
 vim.opt.ignorecase     = true                              -- ignore case
@@ -42,6 +40,7 @@ vim.opt.scrolloff      = 3                                 -- start scrolling 3 
 vim.opt.shiftwidth     = 2                                 -- spaces per tab (when shifting)
 vim.opt.shortmess      = vim.opt.shortmess + 'c'           -- completion messages
 vim.opt.showmatch      = true                              -- auto-match bracket and highlighting
+vim.opt.showmode       = false                             -- do not show mode like. --INSERT-- on the last line
 vim.opt.sidescrolloff  = 3                                 -- same as scrolloff, but for columns
 vim.opt.smarttab       = true                              -- <tab>/<BS> indent/dedent in leading whitespace
 vim.opt.softtabstop    = 2                                 -- two Space instand of Tab
